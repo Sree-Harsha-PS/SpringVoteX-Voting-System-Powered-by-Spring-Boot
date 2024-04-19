@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Election Details</title>
+    <style>
+      body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(45deg, #1e90ff, #00ff00); /* Vibrant gradient background */
+  padding: 20px;
+}
+
+.container {
+  background: linear-gradient(135deg, #ff1493, #00ffff); /* Gradient background for container */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease forwards; /* Fade-in animation */
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+h2 {
+  margin-top: 0;
+  color: #ffffff; /* White heading text color */
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+  color: #ffffff; /* White text color for list items */
+}
+
+li a {
+  text-decoration: none;
+  color: #333333; /* Dark gray link text color */
+  padding: 10px;
+  background: linear-gradient(90deg, #ff6347, #ffd700); /* Gradient background for links */
+  border-radius: 5px;
+  display: inline-block;
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+li a:hover {
+  background: linear-gradient(90deg, #ff4500, #ff8c00); /* Darker gradient on hover */
+}
+
+.winner {
+  color: #28a745;
+  font-size: 200%;
+  border: #333333;
+  background-color: aliceblue;
+  animation: pulse 1s infinite alternate; /* Pulse animation for winner text */
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05); /* Scale up slightly for pulse effect */
+  }
+}
+
+h2,h3,h4{
+  font-size: 200%;
+}
+
+    </style>
+  </head>
+  <body>
+    <h2>Election Details</h2>
+    <h3 th:text="${election.name}"></h3>
+    <h4>Candidates:</h4>
+    <ul>
+      <li th:each="entry : ${candidatesVotes}">
+        <td th:each="innerEntry : ${entry.value.entrySet()}">
+          <span th:text="${innerEntry.key}"></span> - Votes:
+          <span th:text="${innerEntry.value}"></span>
+        </td>
+      </li>
+    </ul>
+    <p th:if="${election.status == 'completed'}" class="winner">
+      Winner: <span th:text="${election.winner.name}"></span>
+    </p>
+  </body>
+</html>

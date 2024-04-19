@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Candidate Dashboard</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9; /* Light gray background */
+        margin: 0;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+        background-color: #663dff;
+        background-image: linear-gradient(319deg, #663dff 0%, #aa00ff 37%, #cc4499 100%);
+      }
+  
+      .container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        background-color: #faa499;
+        background-image: linear-gradient(319deg, #faa499 0%, #f7dd85 37%, #ffc55c 100%);
+        animation: slideIn 1s ease forwards;
+      }
+
+      @keyframes slideIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  
+      .container.center {
+        border: 2px dashed #007bff; /* Blue dashed border */
+        grid-column: 1 / span 2; /* Spanning both columns */
+      }
+  
+      .container.top-left, .container.top-right, .container.bottom-left, .container.bottom-right {
+        border: 2px solid #007bff; /* Blue solid border */
+        animation: pulse 1s infinite alternate;
+      }
+
+      @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(1.1);
+      }
+    }
+  
+      h2, h3, h4 {
+        margin-top: 0;
+        margin-bottom: 20px;
+        color: #007bff; /* Blue heading text color */
+        animation: fadeIn 1s ease forwards;
+      }
+
+      @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+  
+      ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+  
+      li {
+        margin-bottom: 10px;
+      }
+  
+      li a {
+        text-decoration: none;
+        color: #fff;
+        padding: 10px;
+        background-color: #007bff; /* Blue background color */
+        border-radius: 5px;
+        display: inline-block;
+        transition: background-color 0.3s ease; /* Smooth background color transition */
+      }
+      
+  
+      li a:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container center">
+      <h2>Welcome to your Dashboard Candidate!</h2>
+    </div>
+    <div class="container top-left">
+      <h4>Pending Elections:</h4>
+      <input type="hidden" name="userId" th:value="${userId}" />
+      <ul>
+        <li th:each="election : ${pendingElections}">
+          <a
+            th:href="@{/candidateDashboard/electionDetails(userId=${userId},electionId=${election.id})}"
+            ><span th:text="${election.name}"></span
+          ></a>
+        </li>
+      </ul>
+    </div>
+    <div class="container top-right">
+      <h4>Ongoing Elections:</h4>
+      <ul>
+        <li th:each="election : ${ongoingElections}">
+          <a
+            th:href="@{/candidateDashboard/electionDetails(userId=${userId},electionId=${election.id})}"
+            ><span th:text="${election.name}"></span
+          ></a>
+        </li>
+      </ul>
+    </div>
+    <div class="container bottom-left">
+      <h4>Completed Elections:</h4>
+      <ul>
+        <li th:each="election : ${completedElections}">
+          <a
+            th:href="@{/candidateDashboard/electionDetails(userId=${userId},electionId=${election.id})}"
+            ><span th:text="${election.name}"></span
+          ></a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Select Party</title>
+  </head>
+  <style>
+            body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #6495ed, #ffa07a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h2 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 300px;
+            animation: slideIn 1s ease forwards;
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 25px;
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            outline: none;
+            animation: pulse 1s infinite alternate;
+        }
+
+        input[type="text"]:focus {
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.05);
+            }
+        }
+
+        select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 25px;
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            outline: none;
+            animation: pulse 1s infinite alternate;
+        }
+
+        select:focus {
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        h2{
+          background: linear-gradient(to right, #4caf50, cyan);
+          color: aliceblue;
+        }
+
+        button {
+            background: linear-gradient(to right, #4caf50, #008c45);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            width: calc(100% - 20px);
+            transition: background 0.3s ease;
+            animation: pulse 1s infinite alternate;
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #008c45, #4caf50);
+        }
+    </style>
+  </style>
+  <body>
+    
+    <form action="/joinParty" method="POST">
+      <h2>Select Party</h2>
+      <input type="text" name="name" th:text="${name}" placeholder="Name" />
+      <input type="hidden" name="userId" th:value="${userId}" />
+      <label for="party">Choose a party:</label>
+      <select id="party" name="party">
+        <option th:each="party : ${partyOptions}" th:text="${party}"></option>
+      </select>
+      <button type="submit">Join Party</button>
+    </form>
+  </body>
+</html>
